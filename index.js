@@ -19,7 +19,7 @@ var destination = {
 }
 
 var origin = {
-  origin:{
+  origin: {
       id: "",
       balance: ""
   }
@@ -90,15 +90,16 @@ function updateBalance(request, response){
     }
     this_account.balance = this_account.withdraw(event, this_account.balance)
     this_account2.balance = this_account2.deposit(event, this_account2.balance)
-    origin.origin.id = this_account.id;
-    origin.origin.balance = this_account.balance;
-
-    destination.destination.id = this_account2.id;
-    destination.destination.balance = this_account2.balance;
 
     var data = {
-      origin,
-      destination
+      origin: {
+        id: this_account.id,
+        balance: this_account.balance
+      },
+      destination: {
+        id: this_account2.id,
+        balance: this_account2.balance
+      }
     }
 
     response.status(201).send(data);
